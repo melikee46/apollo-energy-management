@@ -3,22 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
+
+::selection { color: #000000; background: #d4ff6b; }
+
+.field {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #404040;
+  background: #111111;
+  padding: 0.875rem 1rem;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.field:focus { border-color: #d4ff6b; box-shadow: 0 0 0 3px rgba(212, 255, 107, 0.16); }
 
 @layer utilities {
   .text-balance {

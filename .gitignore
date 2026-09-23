@@ -25,8 +25,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
+# SECURITY: Never commit any .env files (except .env.local.example which contains no real secrets)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
 .env*.local
+# Catch-all for any env file not already covered above
+.env.*
+!.env.local.example
 
 # vercel
 .vercel
