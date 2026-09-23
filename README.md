@@ -64,7 +64,7 @@ Start the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+The development server is configured to run on port `3001`. Open [http://localhost:3001](http://localhost:3001) in your browser.
 
 ### Validation commands
 

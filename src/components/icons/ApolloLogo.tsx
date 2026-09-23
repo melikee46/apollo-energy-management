@@ -57,29 +57,29 @@ export function ApolloLogo({
         {/* Top arm */}
         <path
           d="M20 20 L16.5 3.5 Q20 0.5 23.5 3.5 Z"
-          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          className="fill-[#E3F5B9] stroke-[#E3F5B9] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
           strokeWidth="0.9"
         />
         {/* Right arm */}
         <path
           d="M20 20 L36.5 16.5 Q39.5 20 36.5 23.5 Z"
-          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          className="fill-[#E3F5B9] stroke-[#E3F5B9] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
           strokeWidth="0.9"
         />
         {/* Bottom arm */}
         <path
           d="M20 20 L23.5 36.5 Q20 39.5 16.5 36.5 Z"
-          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          className="fill-[#E3F5B9] stroke-[#E3F5B9] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
           strokeWidth="0.9"
         />
         {/* Left arm */}
         <path
           d="M20 20 L3.5 23.5 Q0.5 20 3.5 16.5 Z"
-          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          className="fill-[#E3F5B9] stroke-[#E3F5B9] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
           strokeWidth="0.9"
         />
         {/* Centre dot — anchors the arms visually */}
-        <circle cx="20" cy="20" r="3.5" className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]" strokeWidth="0.9" />
+        <circle cx="20" cy="20" r="3.5" className="fill-[#E3F5B9] stroke-[#E3F5B9] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]" strokeWidth="0.9" />
       </svg>
 
       {/* ── Wordmark ───────────────────────────────────────────────────────── */}

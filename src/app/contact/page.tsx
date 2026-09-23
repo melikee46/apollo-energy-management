@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
 	return (
-		<Section bg="black">
-			<div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
-				<div>
+		<Section bg="black" className="py-16 lg:py-20">
+			<div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 xl:gap-24">
+				<div className="flex flex-col justify-center">
 					<p className="text-sm font-bold uppercase tracking-widest text-lime">Contact Apollo</p>
 					<h1 className="mt-6 text-5xl font-black uppercase leading-none text-white sm:text-7xl">
 						Let&apos;s find your next move.
@@ -27,8 +27,18 @@ export default function ContactPage() {
 					<p className="mt-8 max-w-md text-lg leading-8 text-gray-300">
 						Share a little about your site and your goals. Our team will come back with a focused first conversation.
 					</p>
+					<div className="mt-10 space-y-4 text-sm text-gray-300">
+						<div className="rounded-2xl border border-gray-800 bg-gray-950/70 p-4">
+							<p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">Email</p>
+							<a href="mailto:hello@apollo-greensolutions.com" className="mt-2 inline-block text-base font-semibold text-white hover:text-lime">hello@apollo-greensolutions.com</a>
+						</div>
+						<div className="rounded-2xl border border-gray-800 bg-gray-950/70 p-4">
+							<p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">Response window</p>
+							<p className="mt-2 text-base font-semibold text-white">Within 1–2 business days</p>
+						</div>
+					</div>
 				</div>
-				<div className="rounded-[2rem] border border-gray-800 bg-gray-950 p-6 sm:p-10">
+				<div className="rounded-[2rem] border border-gray-800 bg-gray-950 p-6 sm:p-8 lg:p-10">
 					<ContactForm />
 				</div>
 			</div>

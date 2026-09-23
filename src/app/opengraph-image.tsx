@@ -27,17 +27,17 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ color: "#E3F0B8", fontSize: 28, fontWeight: 700, letterSpacing: "0.18em" }}>
+          <div style={{ color: "#E3F5B9", fontSize: 28, fontWeight: 700, letterSpacing: "0.18em" }}>
             APOLLO GREEN SOLUTIONS
           </div>
           <div style={{ fontSize: 76, fontWeight: 900, lineHeight: 1.02, maxWidth: 720 }}>
             Make every watt count.
           </div>
-          <div style={{ color: "#E6F2C0", fontSize: 28 }}>
+          <div style={{ color: "#EAF7D1", fontSize: 28 }}>
             Industrial energy intelligence
           </div>
         </div>
-        <div style={{ color: "#E3F0B8", fontSize: 160, fontWeight: 900 }}>*</div>
+        <div style={{ color: "#E3F5B9", fontSize: 160, fontWeight: 900 }}>*</div>
       </div>
     ),
     { ...size },

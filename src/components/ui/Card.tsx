@@ -43,7 +43,7 @@ const PADDING_CLASSES: Record<CardPadding, string> = {
 // Hover shadow per variant — applied via Framer Motion so CSS shadow-card
 // transitions smoothly rather than snapping
 const HOVER_SHADOW: Record<CardVariant, string> = {
-  dark:  "0 4px 24px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,255,107,0.2)",
+  dark:  "0 4px 24px rgba(0,0,0,0.7), 0 0 0 1px rgba(227,245,185,0.18)",
   light: "0 8px 32px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.08)",
 };
 

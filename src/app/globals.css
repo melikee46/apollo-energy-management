@@ -13,7 +13,7 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-::selection { color: #000000; background: #e3f0b8; }
+::selection { color: #000000; background: #e3f5b9; }
 
 .field {
   width: 100%;
@@ -26,7 +26,7 @@ body {
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.field:focus { border-color: #e3f0b8; box-shadow: 0 0 0 3px rgba(227, 240, 184, 0.16); }
+.field:focus { border-color: #e3f5b9; box-shadow: 0 0 0 3px rgba(227, 245, 185, 0.16); }
 
 @layer utilities {
   .text-balance {

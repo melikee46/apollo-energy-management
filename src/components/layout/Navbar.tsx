@@ -24,6 +24,69 @@ import { ApolloLogo } from "@/components/icons/ApolloLogo";
 import { getMessages, getProducts, localizePath, type Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
+function FlagIcon({ country }: { country: "gb" | "de" }) {
+  const isGerman = country === "de";
+
+  return (
+    <svg viewBox="0 0 24 18" className="h-[16px] w-[16px] shrink-0 overflow-visible" aria-hidden="true">
+      {isGerman ? (
+        <>
+          <rect width="24" height="18" rx="2" fill="#111111" />
+          <rect y="0" width="24" height="6" fill="#000000" />
+          <rect y="6" width="24" height="6" fill="#DD0000" />
+          <rect y="12" width="24" height="6" fill="#FFCE00" />
+        </>
+      ) : (
+        <>
+          <rect width="24" height="18" rx="2" fill="#012169" />
+          <path d="M0 0L24 18M24 0L0 18" stroke="#fff" strokeWidth="3" />
+          <path d="M0 0L24 18M24 0L0 18" stroke="#C8102E" strokeWidth="1.4" />
+          <path d="M12 0V18M0 9H24" stroke="#fff" strokeWidth="5" />
+          <path d="M12 0V18M0 9H24" stroke="#C8102E" strokeWidth="2.4" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+function LanguageToggle({ locale, languagePath }: { locale: Locale; languagePath: string }) {
+  const languages = [
+    { code: "en" as const, label: "EN", flag: "gb" as const },
+    { code: "de" as const, label: "DE", flag: "de" as const },
+  ];
+
+  return (
+    <div className="flex items-center rounded-pill border border-gray-800 bg-white/5 p-1 shadow-card-dark">
+      {languages.map(({ code, label, flag }) => {
+        const active = locale === code;
+        return (
+          <Link
+            key={code}
+            href={localizePath(code, languagePath)}
+            className="relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-pill px-2.5 py-2 text-center"
+            aria-current={active ? "page" : undefined}
+          >
+            {active && (
+              <motion.span
+                layoutId="language-pill"
+                className="absolute inset-0 rounded-pill bg-lime"
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            )}
+            <span className={[
+              "relative z-10 flex items-center gap-1.5",
+              active ? "text-black" : "text-gray-500 hover:text-gray-200",
+            ].join(" ")}>
+              <FlagIcon country={flag} />
+              <span className="text-[10px] font-black uppercase tracking-[0.18em]">{label}</span>
+            </span>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -74,11 +137,11 @@ export function Navbar() {
           </nav>
 
           {/* ── Desktop CTA ────────────────────────────────────────────────── */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex md:items-center md:gap-3">
             <Button href={localHref("/contact")} size="sm">
               {messages.nav.contactUs}
             </Button>
-            <div className="ml-3 flex items-center rounded-pill border border-gray-800 p-1 text-[10px] font-bold uppercase tracking-widest"><Link href={localizePath("en", languagePath)} className={locale === "en" ? "rounded-pill bg-lime px-2 py-1 text-black" : "px-2 py-1 text-gray-500 hover:text-white"}>EN</Link><Link href={localizePath("de", languagePath)} className={locale === "de" ? "rounded-pill bg-lime px-2 py-1 text-black" : "px-2 py-1 text-gray-500 hover:text-white"}>DE</Link></div>
+            <LanguageToggle locale={locale} languagePath={languagePath} />
           </div>
 
           {/* ── Mobile hamburger ───────────────────────────────────────────── */}
@@ -126,7 +189,7 @@ export function Navbar() {
                 <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-gray-600">{messages.nav.productLabel}</p>
                 {products.map((product) => <Link key={product.id} href={localHref(`/products#${product.id}`)} onClick={() => setMobileOpen(false)} className="block rounded-pill px-4 py-2 text-sm text-gray-400 hover:text-lime">{product.name}</Link>)}
               </div>
-              <div className="pt-2 border-t border-gray-800 mt-1">
+              <div className="pt-3 border-t border-gray-800 mt-1">
                 <Button
                   href={localHref("/contact")}
                   size="sm"
@@ -135,7 +198,9 @@ export function Navbar() {
                 >
                   {messages.nav.contactUs}
                 </Button>
-                <div className="flex justify-center gap-2 pt-3 text-xs font-bold uppercase tracking-widest"><Link href={localizePath("en", languagePath)} className={locale === "en" ? "text-lime" : "text-gray-500"}>EN</Link><span className="text-gray-700">/</span><Link href={localizePath("de", languagePath)} className={locale === "de" ? "text-lime" : "text-gray-500"}>DE</Link></div>
+                <div className="mt-3 flex justify-center">
+                  <LanguageToggle locale={locale} languagePath={languagePath} />
+                </div>
               </div>
             </nav>
           </motion.div>
