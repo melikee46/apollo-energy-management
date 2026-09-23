@@ -11,9 +11,9 @@ The product story covers four connected areas:
 
 ## Live Site
 
-**Vercel URL:** `Deploy after publication: add the production URL here`
+**Vercel URL:** https://apollo-energy-management.vercel.app
 
-The production URL is not available yet. After the first Vercel deployment, replace the placeholder above and set the same value as `NEXT_PUBLIC_SITE_URL` in the Vercel project environment variables.
+Set the same value as `NEXT_PUBLIC_SITE_URL` in the Vercel project environment variables.
 
 ## Technology Stack
 
