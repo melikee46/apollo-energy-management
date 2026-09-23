@@ -12,9 +12,15 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://apollo-green-solutions.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://apollo-energy-management.vercel.app"),
   title: { default: "Apollo Green Solutions", template: "%s | Apollo Green Solutions" },
   description: "Industrial-grade energy intelligence for a lower-carbon future.",
+  openGraph: {
+    title: "Apollo Green Solutions",
+    description: "Industrial-grade energy intelligence for a lower-carbon future.",
+    type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Apollo Green Solutions" }],
+  },
 };
 
 export default function RootLayout({
