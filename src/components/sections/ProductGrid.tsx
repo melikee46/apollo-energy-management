@@ -15,17 +15,27 @@ import { Section } from "@/components/ui/Section";
 
 const ICONS: Record<string, LucideIcon> = { Activity, Battery, Settings2, Leaf };
 
-export function ProductGrid() {
+interface ProductGridProps {
+  heading?: string;
+  showViewAllLink?: boolean;
+}
+
+export function ProductGrid({
+  heading = "Built for the real world.",
+  showViewAllLink = true,
+}: ProductGridProps) {
   return (
     <Section bg="black" id="products" grid>
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
         <div>
           <Badge variant="outline">The platform</Badge>
-          <h2 className="mt-5 text-4xl font-black uppercase text-white sm:text-6xl">Built for the real world.</h2>
+          <h2 className="mt-5 text-4xl font-black uppercase text-white sm:text-6xl">{heading}</h2>
         </div>
-        <a href="/products" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-lime hover:text-white">
-          View all products <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
+        {showViewAllLink && (
+          <a href="/products" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-lime hover:text-white">
+            View all products <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        )}
       </div>
       <div className="mt-14 grid gap-5 lg:grid-cols-2">
         {PRODUCTS.map((product) => {

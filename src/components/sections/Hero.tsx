@@ -66,7 +66,7 @@ export function Hero() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-indigo p-4">
                   <p className="text-xs uppercase tracking-wider text-white/70">Peak demand</p>
-                  <p className="mt-2 text-2xl font-black text-white">-32%</p>
+                  <p className="mt-2 text-2xl font-black text-white">-40%</p>
                 </div>
                 <div className="rounded-2xl bg-lime-soft p-4 text-black">
                   <p className="text-xs uppercase tracking-wider text-black/60">CO₂ avoided</p>

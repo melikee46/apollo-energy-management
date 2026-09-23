@@ -48,7 +48,7 @@ export function ApolloLogo({
         }
         role={showText ? undefined : "img"}
         aria-label={showText ? undefined : "Apollo Green Solutions"}
-        aria-hidden="true"
+        aria-hidden={showText}
         focusable="false"
       >
         {/*
@@ -85,10 +85,10 @@ export function ApolloLogo({
       {/* ── Wordmark ───────────────────────────────────────────────────────── */}
       {showText && (
         <div className="flex flex-col leading-none">
-          <span className="text-white font-black text-base uppercase tracking-wider">
+          <span className="block text-white font-black text-base uppercase tracking-wider">
             Apollo
           </span>
-          <span className="text-lime text-[10px] font-bold uppercase tracking-widest">
+          <span className="block text-lime text-[10px] font-bold uppercase tracking-widest">
             Green Solutions
           </span>
         </div>
