@@ -25,7 +25,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "indigo" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface BaseProps {
@@ -55,6 +55,8 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
     "bg-lime text-black font-bold hover:bg-lime-dim hover:shadow-glow-lime-sm",
   secondary:
     "bg-transparent border-2 border-lime text-lime font-bold hover:bg-lime hover:text-black",
+  indigo:
+    "bg-indigo text-white font-bold hover:bg-indigo-dark hover:shadow-glow-indigo",
   ghost:
     "bg-transparent text-white font-semibold hover:text-lime",
 };
