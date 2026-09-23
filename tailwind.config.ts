@@ -9,8 +9,8 @@ import type { Config } from "tailwindcss";
  *
  * Palette rationale:
  *  - Black base: industrial authority, high-contrast canvas
- *  - Lime (#D4FF6B): neon energy accent — CTAs, logo glow, highlighted words
- *  - Lime-soft (#E8F5B8): readable light surface — card/section backgrounds with dark text
+ *  - Lime (#E3F0B8): soft energy accent — CTAs, logo glow, highlighted words
+ *  - Lime-soft (#E6F2C0): readable light surface — card/section backgrounds with dark text
  *  - Indigo (#1E1EDB): bold section break — interrupts the black rhythm, adds brand depth
  *  - White: headings and body copy on dark backgrounds
  */
@@ -25,9 +25,9 @@ const config: Config = {
       colors: {
         // ── Brand core ──────────────────────────────────────────────
         lime: {
-          DEFAULT: "#D4FF6B",   // neon accent — buttons, glows, highlights
-          soft: "#E8F5B8",      // pastel surface — card/section backgrounds
-          dim: "#AACE45",       // slightly deeper for hover states
+          DEFAULT: "#E3F0B8",   // pastel accent — buttons, glows, highlights
+          soft: "#E6F2C0",      // pastel surface — card/section backgrounds
+          dim: "#C4D58A",       // slightly deeper for hover states
         },
         indigo: {
           DEFAULT: "#1E1EDB",   // royal indigo — full-section block colour
@@ -76,8 +76,8 @@ const config: Config = {
 
       boxShadow: {
         // Neon glow effects for logo and accent elements
-        "glow-lime":    "0 0 20px rgba(212,255,107,0.6), 0 0 60px rgba(212,255,107,0.3)",
-        "glow-lime-sm": "0 0 10px rgba(212,255,107,0.5), 0 0 30px rgba(212,255,107,0.2)",
+        "glow-lime":    "0 0 20px rgba(227,240,184,0.4), 0 0 60px rgba(227,240,184,0.18)",
+        "glow-lime-sm": "0 0 10px rgba(227,240,184,0.35), 0 0 30px rgba(227,240,184,0.14)",
         "glow-indigo":  "0 0 24px rgba(30,30,219,0.5),  0 0 60px rgba(30,30,219,0.2)",
         "card-dark":    "0 2px 8px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)",
         "card-light":   "0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06)",
@@ -85,7 +85,7 @@ const config: Config = {
 
       backgroundImage: {
         // Subtle grid overlay — gives the geometric / data-viz feel
-        "grid-dark": "linear-gradient(rgba(212,255,107,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,255,107,0.03) 1px, transparent 1px)",
+        "grid-dark": "linear-gradient(rgba(227,240,184,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(227,240,184,0.03) 1px, transparent 1px)",
         "grid-indigo": "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
       },
 
@@ -101,8 +101,8 @@ const config: Config = {
 
       keyframes: {
         glowPulse: {
-          "0%, 100%": { filter: "drop-shadow(0 0 8px rgba(212,255,107,0.7))" },
-          "50%":       { filter: "drop-shadow(0 0 20px rgba(212,255,107,1))" },
+          "0%, 100%": { filter: "drop-shadow(0 0 8px rgba(227,240,184,0.45))" },
+          "50%":       { filter: "drop-shadow(0 0 20px rgba(227,240,184,0.7))" },
         },
       },
     },

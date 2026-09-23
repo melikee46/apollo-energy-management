@@ -10,28 +10,29 @@ import { ApolloLogo } from "@/components/icons/ApolloLogo";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { getMessages, localizePath, type Locale } from "@/lib/i18n";
 
-export function Hero() {
+export function Hero({ locale = "en" }: { locale?: Locale }) {
+  const messages = getMessages(locale);
+
   return (
     <Section bg="black" grid className="min-h-[720px] pt-16 lg:min-h-[800px]">
       <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
         <div className="max-w-3xl">
-          <Badge variant="outline">Industrial energy intelligence</Badge>
+          <Badge variant="outline">{messages.hero.badge}</Badge>
           <h1 className="mt-8 text-5xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-display-2xl">
-            Make every
-            <span className="block text-lime">watt count.</span>
+            {messages.hero.title}
+            <span className="block text-lime">{messages.hero.accent}</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-8 text-gray-300 sm:text-xl">
-            Apollo turns complex industrial energy systems into measurable,
-            actionable performance. Monitor, optimise, and decarbonise from one
-            intelligent platform.
+            {messages.hero.text}
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button href="/contact" size="lg">
-              Book a consultation <ArrowUpRight size={17} aria-hidden="true" />
+            <Button href={localizePath(locale, "/contact")} size="lg">
+              {messages.hero.consultation} <ArrowUpRight size={17} aria-hidden="true" />
             </Button>
-            <Button href="/products" variant="secondary" size="lg">
-              Explore platform
+            <Button href={localizePath(locale, "/products")} variant="secondary" size="lg">
+              {messages.hero.explore}
             </Button>
           </div>
         </div>
@@ -41,18 +42,18 @@ export function Hero() {
           <div className="relative aspect-square rounded-[2rem] border border-lime/30 bg-gray-950 p-8 shadow-glow-lime-sm">
             <div className="flex items-center justify-between border-b border-white/10 pb-5">
               <span className="text-xs font-bold uppercase tracking-widest text-gray-400">
-                Live site overview
+                {messages.hero.liveOverview}
               </span>
               <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-lime">
                 <span className="h-2 w-2 rounded-full bg-lime shadow-glow-lime-sm" />
-                Online
+                {messages.hero.online}
               </span>
             </div>
             <div className="flex h-[calc(100%-3rem)] flex-col justify-between pt-8">
               <div>
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="text-sm text-gray-400">Energy efficiency</p>
+                    <p className="text-sm text-gray-400">{messages.hero.efficiency}</p>
                     <p className="mt-2 text-5xl font-black text-white">94.8%</p>
                   </div>
                   <Activity className="mb-2 text-lime" size={32} aria-hidden="true" />
@@ -65,11 +66,11 @@ export function Hero() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-indigo p-4">
-                  <p className="text-xs uppercase tracking-wider text-white/70">Peak demand</p>
+                  <p className="text-xs uppercase tracking-wider text-white/70">{messages.hero.peakDemand}</p>
                   <p className="mt-2 text-2xl font-black text-white">-40%</p>
                 </div>
                 <div className="rounded-2xl bg-lime-soft p-4 text-black">
-                  <p className="text-xs uppercase tracking-wider text-black/60">CO₂ avoided</p>
+                  <p className="text-xs uppercase tracking-wider text-black/60">{messages.hero.co2}</p>
                   <p className="mt-2 text-2xl font-black">1.2M t</p>
                 </div>
               </div>

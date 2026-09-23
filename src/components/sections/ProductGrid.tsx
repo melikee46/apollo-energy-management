@@ -8,37 +8,42 @@
 import { Activity, Battery, Leaf, Settings2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
-import { PRODUCTS } from "@/lib/data";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
+import { getMessages, getProducts, localizePath, type Locale } from "@/lib/i18n";
 
 const ICONS: Record<string, LucideIcon> = { Activity, Battery, Settings2, Leaf };
 
 interface ProductGridProps {
   heading?: string;
   showViewAllLink?: boolean;
+  locale?: Locale;
 }
 
 export function ProductGrid({
   heading = "Built for the real world.",
   showViewAllLink = true,
+  locale = "en",
 }: ProductGridProps) {
+  const messages = getMessages(locale);
+  const products = getProducts(locale);
+
   return (
     <Section bg="black" id="products" grid>
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
         <div>
-          <Badge variant="outline">The platform</Badge>
+          <Badge variant="outline">{messages.products.eyebrow}</Badge>
           <h2 className="mt-5 text-4xl font-black uppercase text-white sm:text-6xl">{heading}</h2>
         </div>
         {showViewAllLink && (
-          <a href="/products" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-lime hover:text-white">
-            View all products <ArrowUpRight size={16} aria-hidden="true" />
+          <a href={localizePath(locale, "/products")} className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-lime hover:text-white">
+            {messages.products.viewAll} <ArrowUpRight size={16} aria-hidden="true" />
           </a>
         )}
       </div>
       <div className="mt-14 grid gap-5 lg:grid-cols-2">
-        {PRODUCTS.map((product) => {
+        {products.map((product) => {
           const Icon = ICONS[product.icon] ?? Activity;
           return (
             <div key={product.id} id={product.id}>

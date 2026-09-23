@@ -6,8 +6,8 @@
  * from a central point, giving an energy/rotation feel without being a
  * direct copy of any existing mark.
  *
- * Neon lime glow is achieved via SVG filter + drop-shadow — more reliable
- * than CSS box-shadow on non-rectangular SVG elements.
+ * The mark is bright by default and dims to a thin, dark tube outline on hover.
+ * SVG transitions keep the effect visible on the non-rectangular shape.
  *
  * Props:
  *  - size: pixel dimension (width = height)
@@ -41,11 +41,7 @@ export function ApolloLogo({
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={
-          animate
-            ? "animate-glow-pulse"
-            : "drop-shadow-[0_0_8px_rgba(212,255,107,0.85)]"
-        }
+        className={`group/logo transition-[filter] duration-300 motion-reduce:transition-none ${animate ? "animate-glow-pulse group-hover/logo:animate-none" : "drop-shadow-[0_0_8px_rgba(227,240,184,0.6)]"} group-hover/logo:drop-shadow-none`}
         role={showText ? undefined : "img"}
         aria-label={showText ? undefined : "Apollo Green Solutions"}
         aria-hidden={showText}
@@ -61,25 +57,29 @@ export function ApolloLogo({
         {/* Top arm */}
         <path
           d="M20 20 L16.5 3.5 Q20 0.5 23.5 3.5 Z"
-          fill="#D4FF6B"
+          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          strokeWidth="0.9"
         />
         {/* Right arm */}
         <path
           d="M20 20 L36.5 16.5 Q39.5 20 36.5 23.5 Z"
-          fill="#D4FF6B"
+          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          strokeWidth="0.9"
         />
         {/* Bottom arm */}
         <path
           d="M20 20 L23.5 36.5 Q20 39.5 16.5 36.5 Z"
-          fill="#D4FF6B"
+          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          strokeWidth="0.9"
         />
         {/* Left arm */}
         <path
           d="M20 20 L3.5 23.5 Q0.5 20 3.5 16.5 Z"
-          fill="#D4FF6B"
+          className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]"
+          strokeWidth="0.9"
         />
         {/* Centre dot — anchors the arms visually */}
-        <circle cx="20" cy="20" r="3.5" fill="#D4FF6B" />
+        <circle cx="20" cy="20" r="3.5" className="fill-[#E3F0B8] stroke-[#E3F0B8] transition-[fill,stroke] duration-300 motion-reduce:transition-none group-hover/logo:fill-transparent group-hover/logo:stroke-[#4a4a4a]" strokeWidth="0.9" />
       </svg>
 
       {/* ── Wordmark ───────────────────────────────────────────────────────── */}

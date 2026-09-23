@@ -25,6 +25,7 @@ Set the same value as `NEXT_PUBLIC_SITE_URL` in the Vercel project environment v
 | [Framer Motion](https://www.framer.com/motion/) | Adds restrained page, card, and interaction motion without turning an industrial B2B interface into a distracting product demo. |
 | [react-hook-form](https://react-hook-form.com/) + [Zod](https://zod.dev/) | Provides lightweight form state and one shared validation schema for both the contact form and the server API route. |
 | [lucide-react](https://lucide.dev/) | Supplies consistent, accessible interface icons without introducing a second visual language. |
+| [Resend](https://resend.com/) | Delivers contact form enquiries to a configured business inbox. |
 
 ## Getting Started
 
@@ -55,7 +56,7 @@ Create the local environment file from the safe template:
 cp .env.local.example .env.local
 ```
 
-Open `.env.local` and fill in the values required for your environment. Do not commit `.env.local`; it is intentionally ignored by git. The current contact demo can run without an email provider, but production delivery and shared rate limiting should be configured before launch.
+Open `.env.local` and fill in the values required for your environment. Do not commit `.env.local`; it is intentionally ignored by git. Set `RESEND_API_KEY`, `CONTACT_FORM_TO_EMAIL`, and a verified `CONTACT_FORM_FROM_EMAIL` before using the contact form; the endpoint returns an error when delivery is not configured.
 
 Start the development server:
 
@@ -112,13 +113,13 @@ The project includes the following baseline protections:
 - **Rate limiting:** the contact endpoint uses a sliding-window in-memory limiter. A shared Redis-backed limiter should replace it for a multi-instance production deployment.
 - **Security headers:** `next.config.mjs` configures CSP, `X-Frame-Options`, `X-Content-Type-Options`, HSTS, Referrer-Policy, and Permissions-Policy headers.
 - **Generic API errors:** the contact endpoint does not return internal validation or processing details to callers.
+- **Email delivery:** Resend sends validated enquiries to the configured destination without logging message content or email addresses.
 
 These controls matter because the contact route accepts untrusted public input, while the rest of the site should remain deployable without exposing configuration or weakening browser isolation.
 
 ## What I Would Improve With More Time
 
 - Replace the in-memory rate limiter with Upstash Redis for consistent limits across Vercel instances.
-- Connect the contact route to a transactional email provider and add delivery observability without logging personal message content.
 - Add an OG image and a small set of real product or installation photographs once approved brand assets are available.
 - Add automated end-to-end tests for navigation, mobile menu behaviour, form validation, honeypot rejection, and rate-limit responses.
 - Add a CMS or content workflow if product specifications and team content will be edited by non-developers.

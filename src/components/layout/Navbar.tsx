@@ -21,12 +21,24 @@ import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ApolloLogo } from "@/components/icons/ApolloLogo";
-import { NAV_LINKS, PRODUCTS } from "@/lib/data";
+import { getMessages, getProducts, localizePath, type Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const routeLocale: Locale | null = pathname.startsWith("/de") ? "de" : pathname.startsWith("/en") ? "en" : null;
+  const locale = routeLocale ?? "en";
+  const messages = getMessages(locale);
+  const products = getProducts(locale);
+  const languagePath = routeLocale ? pathname.slice(locale.length + 1) || "/" : pathname;
+  const navLinks = [
+    { label: messages.nav.home, href: "/" },
+    { label: messages.nav.products, href: "/products" },
+    { label: messages.nav.about, href: "/about" },
+    { label: messages.nav.contact, href: "/contact" },
+  ];
+  const localHref = (href: string) => routeLocale ? localizePath(locale, href) : href;
 
   // Exact match for home, prefix match for everything else
   const isActive = (href: string) =>
@@ -38,7 +50,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
 
           {/* ── Logo ───────────────────────────────────────────────────────── */}
-          <Link href="/" aria-label="Apollo Green Solutions — home">
+          <Link href={localHref("/")} aria-label="Apollo Green Solutions — home">
             <ApolloLogo size={32} showText animate={false} />
           </Link>
 
@@ -47,32 +59,33 @@ export function Navbar() {
             className="hidden md:flex items-center gap-1"
             aria-label="Main navigation"
           >
-            {NAV_LINKS.map((link) => link.label === "Products" ? (
+            {navLinks.map((link) => link.label === messages.nav.products ? (
               <div key={link.href} className="group relative">
-                <Link href={link.href} className={["inline-flex items-center gap-1 rounded-pill px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-all duration-150", isActive(link.href) ? "bg-lime text-black" : "text-gray-400 hover:bg-white/5 hover:text-white"].join(" ")}>
+                <Link href={localHref(link.href)} className={["inline-flex items-center gap-1 rounded-pill px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-all duration-150", isActive(localHref(link.href)) ? "bg-lime text-black" : "text-gray-400 hover:bg-white/5 hover:text-white"].join(" ")}>
                   {link.label}<ChevronDown size={14} aria-hidden="true" />
                 </Link>
                 <div className="invisible absolute left-0 top-full w-64 translate-y-2 rounded-2xl border border-gray-800 bg-gray-950 p-2 opacity-0 shadow-card-dark transition-all group-hover:visible group-hover:translate-y-1 group-hover:opacity-100">
-                  {PRODUCTS.map((product) => <Link key={product.id} href={`/products#${product.id}`} className="block rounded-xl px-3 py-3 text-sm text-gray-300 hover:bg-lime hover:text-black"><span className="block font-bold">{product.name}</span><span className="mt-1 block text-xs opacity-70">{product.tagline}</span></Link>)}
+                  {products.map((product) => <Link key={product.id} href={localHref(`/products#${product.id}`)} className="block rounded-xl px-3 py-3 text-sm text-gray-300 hover:bg-lime hover:text-black"><span className="block font-bold">{product.name}</span><span className="mt-1 block text-xs opacity-70">{product.tagline}</span></Link>)}
                 </div>
               </div>
             ) : (
-              <Link key={link.href} href={link.href} className={["rounded-pill px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-all duration-150", isActive(link.href) ? "bg-lime text-black" : "text-gray-400 hover:bg-white/5 hover:text-white"].join(" ")}>{link.label}</Link>
+              <Link key={link.href} href={localHref(link.href)} className={["rounded-pill px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-all duration-150", isActive(localHref(link.href)) ? "bg-lime text-black" : "text-gray-400 hover:bg-white/5 hover:text-white"].join(" ")}>{link.label}</Link>
             ))}
           </nav>
 
           {/* ── Desktop CTA ────────────────────────────────────────────────── */}
           <div className="hidden md:block">
-            <Button href="/contact" size="sm">
-              Contact Us
+            <Button href={localHref("/contact")} size="sm">
+              {messages.nav.contactUs}
             </Button>
+            <div className="ml-3 flex items-center rounded-pill border border-gray-800 p-1 text-[10px] font-bold uppercase tracking-widest"><Link href={localizePath("en", languagePath)} className={locale === "en" ? "rounded-pill bg-lime px-2 py-1 text-black" : "px-2 py-1 text-gray-500 hover:text-white"}>EN</Link><Link href={localizePath("de", languagePath)} className={locale === "de" ? "rounded-pill bg-lime px-2 py-1 text-black" : "px-2 py-1 text-gray-500 hover:text-white"}>DE</Link></div>
           </div>
 
           {/* ── Mobile hamburger ───────────────────────────────────────────── */}
           <button
             className="md:hidden rounded-pill p-2 text-gray-400 hover:text-lime transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={mobileOpen ? messages.nav.closeMenu : messages.nav.openMenu}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
           >
@@ -94,14 +107,14 @@ export function Navbar() {
             className="overflow-hidden border-t border-gray-800 bg-black/95 md:hidden"
           >
             <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Mobile navigation">
-              {NAV_LINKS.map((link) => (
+              {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={localHref(link.href)}
                   onClick={() => setMobileOpen(false)}
                   className={[
                     "rounded-pill px-4 py-3 text-sm font-semibold uppercase tracking-wider transition-all",
-                    isActive(link.href)
+                    isActive(localHref(link.href))
                       ? "bg-lime text-black"
                       : "text-gray-400 hover:bg-white/5 hover:text-white",
                   ].join(" ")}
@@ -110,18 +123,19 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="ml-4 border-l border-gray-800 pl-4">
-                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-gray-600">Products</p>
-                {PRODUCTS.map((product) => <Link key={product.id} href={`/products#${product.id}`} onClick={() => setMobileOpen(false)} className="block rounded-pill px-4 py-2 text-sm text-gray-400 hover:text-lime">{product.name}</Link>)}
+                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-gray-600">{messages.nav.productLabel}</p>
+                {products.map((product) => <Link key={product.id} href={localHref(`/products#${product.id}`)} onClick={() => setMobileOpen(false)} className="block rounded-pill px-4 py-2 text-sm text-gray-400 hover:text-lime">{product.name}</Link>)}
               </div>
               <div className="pt-2 border-t border-gray-800 mt-1">
                 <Button
-                  href="/contact"
+                  href={localHref("/contact")}
                   size="sm"
                   className="w-full"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Contact Us
+                  {messages.nav.contactUs}
                 </Button>
+                <div className="flex justify-center gap-2 pt-3 text-xs font-bold uppercase tracking-widest"><Link href={localizePath("en", languagePath)} className={locale === "en" ? "text-lime" : "text-gray-500"}>EN</Link><span className="text-gray-700">/</span><Link href={localizePath("de", languagePath)} className={locale === "de" ? "text-lime" : "text-gray-500"}>DE</Link></div>
               </div>
             </nav>
           </motion.div>
