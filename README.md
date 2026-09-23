@@ -1,5 +1,7 @@
 # Apollo Green Solutions
 
+**Live Site:** https://apollo-energy-management.vercel.app/
+
 Apollo Green Solutions is a B2B marketing site for an industrial energy management company. The site presents a practical energy intelligence platform for organisations that want to monitor, optimise, and decarbonise their operations.
 
 The product story covers four connected areas:
@@ -11,7 +13,7 @@ The product story covers four connected areas:
 
 ## Live Site
 
-**Vercel URL:** https://apollo-energy-management.vercel.app
+**Vercel URL:** https://apollo-energy-management.vercel.app/
 
 Set the same value as `NEXT_PUBLIC_SITE_URL` in the Vercel project environment variables.
 
@@ -20,6 +22,7 @@ Set the same value as `NEXT_PUBLIC_SITE_URL` in the Vercel project environment v
 | Technology | Why it is used |
 | --- | --- |
 | [Next.js 14 App Router](https://nextjs.org/docs/app) | Provides server-first rendering, route-level metadata, static pages, and a clean structure for a Vercel deployment. |
+| Custom i18n layer (`src/lib/i18n.ts`) | Provides English/German translations and locale-based route management through the project's shared i18n layer. |
 | [TypeScript](https://www.typescriptlang.org/) | Makes shared content models, component props, form payloads, and API boundaries explicit and safer to change. |
 | [Tailwind CSS](https://tailwindcss.com/) | Keeps the visual system close to the component markup while centralising Apollo's colour, spacing, shadow, and typography tokens. |
 | [Framer Motion](https://www.framer.com/motion/) | Adds restrained page, card, and interaction motion without turning an industrial B2B interface into a distracting product demo. |
@@ -78,12 +81,25 @@ npm run build
 ```text
 src/
 ├── app/                  Next.js routes, page metadata, API routes, robots, and sitemap
+│   ├── [locale]/         Locale-aware routes for English and German pages
+│   │   ├── about/
+│   │   ├── contact/
+│   │   ├── products/
+│   │   ├── privacy/
+│   │   ├── cookies/
+│   │   └── terms/
+│   ├── privacy/          Privacy Policy route
+│   ├── cookies/          Cookie Policy route
+│   └── terms/            Terms of Service route
 ├── components/
 │   ├── ui/               Reusable primitives: Button, Badge, Card, and Section
 │   ├── sections/         Page sections such as Hero, ProductGrid, TeamSection, and ContactForm
+│   │   └── LocalizedLegalPage.tsx  Shared locale-aware legal page renderer
 │   ├── layout/           Navbar, Footer, and page transition layout components
 │   └── icons/            Brand-specific SVG icons, including the Apollo logo
-└── lib/                  Central data, shared Zod validation, and rate limiting
+└── lib/
+	├── i18n.ts            Supported locales and translated message objects
+	└── ...                 Central data, shared Zod validation, and rate limiting
 ```
 
 Content such as navigation links, products, team members, statistics, and footer links is centralised in `src/lib/data.ts`. This keeps content changes separate from presentation logic and gives the TypeScript compiler a single source of truth for shared structures.
@@ -92,15 +108,25 @@ Content such as navigation links, products, team members, statistics, and footer
 
 ### High-contrast industrial palette
 
-The visual system uses a black foundation, neon lime accent, pastel lime surface, royal indigo section blocks, and white foreground text. Black gives the site the authority and focus expected of an industrial operations tool. Neon lime signals energy, status, and action. Royal indigo creates a strong section break and adds depth without relying on a dark-blue-only interface.
+The visual system uses a black foundation, soft pastel-lime accent (`#E3F5B9`), pastel lime surface, royal indigo section blocks, and white foreground text. Black gives the site the authority and focus expected of an industrial operations tool. The pastel-lime accent provides a calm energy signal for actions and status cues. Royal indigo creates a strong section break and adds depth without relying on a dark-blue-only interface.
 
 ### Pills and controlled glow
 
-Pill-shaped navigation items and calls to action make the interface feel direct and easy to scan. Neon glow is reserved for the Apollo mark, important calls to action, and selected status cues so it feels like an energy signal rather than decoration applied everywhere.
+Pill-shaped navigation items and calls to action make the interface feel direct and easy to scan. Accent glow is reserved for the Apollo mark, important calls to action, and selected status cues so it feels like an energy signal rather than decoration applied everywhere.
 
 ### Motion with restraint
 
 Motion is limited to page entrance transitions, subtle card lift, and small button feedback. The goal is to make the interface feel responsive while preserving the calm, operational character expected by a B2B industrial audience. The interface remains usable when motion is reduced by the browser or operating system.
+
+## Internationalization
+
+The site supports English (`en`) and German (`de`) through locale-based routes such as `/en/about` and `/de/about`. The navbar language switcher lets visitors move between the available locales while preserving the current page where a translated route exists.
+
+Translations and supported locale configuration are maintained in `src/lib/i18n.ts`. To add another language, add its locale and translated message object there, then provide the corresponding locale-aware route content. Shared legal page rendering is handled by `src/components/sections/LocalizedLegalPage.tsx`.
+
+## Legal Pages
+
+The site includes Privacy Policy (`/privacy`) and Cookie Policy (`/cookies`) pages, with locale-specific versions available under `/en/privacy`, `/de/privacy`, `/en/cookies`, and `/de/cookies`. Terms of Service is also currently implemented at `/terms` and under the locale routes `/en/terms` and `/de/terms`; the footer links to Terms of Service as reflected in the codebase.
 
 ## Security and Reliability
 
@@ -114,6 +140,7 @@ The project includes the following baseline protections:
 - **Security headers:** `next.config.mjs` configures CSP, `X-Frame-Options`, `X-Content-Type-Options`, HSTS, Referrer-Policy, and Permissions-Policy headers.
 - **Generic API errors:** the contact endpoint does not return internal validation or processing details to callers.
 - **Email delivery:** Resend sends validated enquiries to the configured destination without logging message content or email addresses.
+- **Legal pages:** Privacy Policy and Cookie Policy are available in both supported locales, alongside the current Terms of Service routes.
 
 These controls matter because the contact route accepts untrusted public input, while the rest of the site should remain deployable without exposing configuration or weakening browser isolation.
 
@@ -123,6 +150,7 @@ These controls matter because the contact route accepts untrusted public input, 
 - Add an OG image and a small set of real product or installation photographs once approved brand assets are available.
 - Add automated end-to-end tests for navigation, mobile menu behaviour, form validation, honeypot rejection, and rate-limit responses.
 - Add a CMS or content workflow if product specifications and team content will be edited by non-developers.
+- Legacy non-localized routes (e.g. `/about`) still coexist with the new `[locale]` routes; these should be consolidated behind middleware-based locale redirection.
 
 ## Deployment
 
